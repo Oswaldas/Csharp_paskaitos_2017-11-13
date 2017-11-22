@@ -21,7 +21,7 @@ namespace _18_2_Papildomos_uzd
             Console.WriteLine("atlyginimu didesniu uz vidurki kiekis: " + programa.DaugiauUzVidurki(atlyginimai));
             Console.WriteLine("atlyginimu didesniu uz 1500 kiekis: " + programa.DaugiauUzX(atlyginimai, 1500));
             programa.TrysDidziausios(atlyginimai);
-
+            Console.WriteLine("Penktas didziausias atlyginimas :" + programa.PenktaDidziausia(atlyginimai));
         }
 
         public void Ivedimas(List<double> atlyginimai)
@@ -116,20 +116,45 @@ namespace _18_2_Papildomos_uzd
 
         public void TrysDidziausios(List<double> atlyginimai)
         {
-            var didziausias1 = DidziausiaAlga(atlyginimai);
-            var didziausias2 = MaziausiaAlga(atlyginimai);
+            double didziausias1 = DidziausiaAlga(atlyginimai);
+            double didziausias2 = 0;
+            double didziausias3 = 0;
 
             foreach (var atlyginimas in atlyginimai)
             {
-                if (didziausias2 < didziausias1 && didziausias2 < atlyginimas && didziausias1 != atlyginimas)
+                if (atlyginimas < didziausias1 && didziausias2 < atlyginimas)
                 {
                     didziausias2 = atlyginimas;
                 }
+                if (atlyginimas < didziausias1 && atlyginimas < didziausias2 && didziausias3 < atlyginimas)
+                {
+                    atlyginimai.Sort();
+                    atlyginimai.Reverse();
+                    didziausias3 = atlyginimai[2];
+                }
             }
+            // foreach (var atlyginimas in atlyginimai)
+            // {
+            //if (didziausias2 < didziausias1 && didziausias2 < atlyginimas && didziausias1 != atlyginimas)
+            //{
+            // didziausias2 = atlyginimas;
+            //}
+            //if (didziausias3 < didziausias1 && didziausias3 < atlyginimas && didziausias1 != atlyginimas && didziausias2 != atlyginimas)
+            //{
+            //didziausias3 = atlyginimas;
+            //}
+            //}
 
             Console.WriteLine("Didziausias atlyginimas :" + didziausias1 + " eur");
             Console.WriteLine("Antras didziausias atlyginimas :" + didziausias2 + " eur");
-
+            Console.WriteLine("Trecias didziausias atlyginimas :" + atlyginimai[2] + " eur");
+        }
+        // rasti penkta didziausias alga
+        public double PenktaDidziausia(List<double> atlyginimai)
+        {
+            atlyginimai.Sort();
+            atlyginimai.Reverse();
+            return atlyginimai[4];
         }
     }
 }
